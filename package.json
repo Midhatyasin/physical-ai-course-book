@@ -1,0 +1,12 @@
+{
+  "name": "ai-book-project",
+  "version": "1.0.0",
+  "description": "AI/Spec-Driven Book with Integrated RAG Chatbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["AI", "book", "docusaurus", "rag", "chatbot"],
+  "author": "AI Developer",
+  "license": "MIT"
+}
