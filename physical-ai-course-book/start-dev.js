@@ -38,6 +38,6 @@ setTimeout(() => {
 }, 3000);
 
 console.log('\n📝 Notes:');
-console.log('   - Backend API will be available at http://localhost:3002');
+console.log('   - Backend API will be available at http://localhost:3003');
 console.log('   - Frontend will be available at http://localhost:3000');
 console.log('   - Press Ctrl+C to stop both servers\n');

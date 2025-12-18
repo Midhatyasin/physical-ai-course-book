@@ -16,7 +16,7 @@ npx docusaurus start
 
 echo.
 echo 📝 Notes:
-echo    - Backend API will be available at http://localhost:3002
+echo    - Backend API will be available at http://localhost:3003
 echo    - Frontend will be available at http://localhost:3000
 echo    - Press Ctrl+C to stop the frontend server
 echo    - Close the backend server window to stop the backend
