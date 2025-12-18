@@ -1,6 +1,9 @@
 // Authentication Test Script
 // This script will automatically test the registration and login endpoints
 
+// Use node-fetch for compatibility
+const fetch = require('node-fetch');
+
 async function testAuthentication() {
   const BASE_URL = 'http://localhost:3003/api/auth';
   
