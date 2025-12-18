@@ -37,9 +37,31 @@ npm start
 npm run build
 ```
 
+### 6. Run the Chatbot Backend (Optional)
+For the chatbot to work, you need to run the backend API:
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file with your API keys (copy from `.env.example` if it exists)
+
+4. Start the backend server:
+   ```bash
+   npm start
+   ```
+
+5. The backend will run on port 3001 by default
+
 ## 🧠 Tech Stack
 - **Frontend**: Docusaurus + Spec-Kit Plus
-- **Backend**: FastAPI
+- **Backend**: Express.js (for chatbot API)
 - **Database**: Supabase (PostgreSQL)
 - **Vector DB**: Qdrant Cloud
 - **LLM**: Google Gemini API
