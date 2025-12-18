@@ -4,13 +4,13 @@ require('dotenv').config();
 
 // Initialize Better Auth
 const { betterAuth } = require('better-auth');
-const { express } = require('better-auth/express');
+const { express: expressAdapter } = require('better-auth/express');
 const authConfig = require('./auth.config');
 
 let authRouter;
 try {
   const auth = betterAuth(authConfig);
-  authRouter = express(auth);
+  authRouter = expressAdapter(auth);
   console.log('Better Auth initialized successfully');
 } catch (error) {
   console.error('Failed to initialize Better Auth:', error.message);
