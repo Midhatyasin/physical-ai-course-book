@@ -4,22 +4,26 @@ require('dotenv').config();
 
 // Initialize Better Auth
 const { betterAuth } = require('better-auth');
+const { express } = require('better-auth/express');
 const authConfig = require('./auth.config');
 
-let auth;
+let authRouter;
 try {
-  auth = betterAuth(authConfig);
+  const auth = betterAuth(authConfig);
+  authRouter = express(auth);
   console.log('Better Auth initialized successfully');
 } catch (error) {
   console.error('Failed to initialize Better Auth:', error.message);
   console.log('Continuing without authentication...');
-  // Create a mock auth object for development
-  auth = {
-    handler: (req, res) => {
+  // Create a mock auth router for development
+  authRouter = (req, res, next) => {
+    if (req.path.startsWith('/api/auth')) {
       res.status(501).json({ 
         error: 'Authentication not available', 
         message: 'Better Auth failed to initialize. Check database configuration.' 
       });
+    } else {
+      next();
     }
   };
 }
@@ -32,7 +36,7 @@ app.use(cors());
 app.use(express.json());
 
 // Better Auth routes
-app.use('/api/auth', auth.handler);
+app.use('/api/auth', authRouter);
 
 // Mock chat endpoint - in a real implementation, this would connect to Gemini API and Qdrant
 app.post('/api/chat', async (req, res) => {
