@@ -1,24 +1,6 @@
-// Auth configuration for Better Auth
-require('dotenv').config();
+// This file is no longer used as we've switched to a simpler authentication system
+// Keeping it for reference only
 
-const authConfig = {
-  // Database configuration (using Supabase/PostgreSQL)
-  database: process.env.SUPABASE_URL,
-  
-  // Secret key for JWT signing
-  secret: process.env.AUTH_SECRET,
-  
-  // Session configuration
-  session: {
-    expiresIn: 60 * 60 * 24 * 7, // 1 week
-    cookie: {
-      secure: false, // Set to true in production with HTTPS
-      httpOnly: true,
-      sameSite: 'lax',
-    },
-  },
-};
-
-module.exports = authConfig;
+module.exports = {}; // Empty config
 
 module.exports = authConfig;

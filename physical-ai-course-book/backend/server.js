@@ -1,42 +1,123 @@
 const express = require('express');
 const cors = require('cors');
+const session = require('express-session');
 require('dotenv').config();
-
-// Initialize Better Auth
-const { betterAuth } = require('better-auth');
-const { express: expressAdapter } = require('better-auth/express');
-const authConfig = require('./auth.config');
-
-let authRouter;
-try {
-  const auth = betterAuth(authConfig);
-  authRouter = expressAdapter(auth);
-  console.log('Better Auth initialized successfully');
-} catch (error) {
-  console.error('Failed to initialize Better Auth:', error.message);
-  console.log('Continuing without authentication...');
-  // Create a mock auth router for development
-  authRouter = (req, res, next) => {
-    if (req.path.startsWith('/api/auth')) {
-      res.status(501).json({ 
-        error: 'Authentication not available', 
-        message: 'Better Auth failed to initialize. Check database configuration.' 
-      });
-    } else {
-      next();
-    }
-  };
-}
 
 const app = express();
 const PORT = process.env.PORT || 3003;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
+app.use(session({
+  secret: process.env.AUTH_SECRET || 'fallback-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    secure: false, // Set to true in production with HTTPS
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  }
+}));
 
-// Better Auth routes
-app.use('/api/auth', authRouter);
+// Simple in-memory user store (in production, use a database)
+const users = {};
+
+// Authentication routes
+const bcrypt = require('bcrypt');
+
+// Register endpoint
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { email, password, name } = req.body;
+    
+    // Check if user already exists
+    if (users[email]) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+    
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    // Store user
+    users[email] = {
+      id: Date.now().toString(),
+      email,
+      name,
+      password: hashedPassword
+    };
+    
+    // Create session
+    req.session.userId = users[email].id;
+    req.session.user = {
+      id: users[email].id,
+      email: users[email].email,
+      name: users[email].name
+    };
+    
+    res.status(201).json({
+      user: req.session.user
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Login endpoint
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    // Check if user exists
+    const user = users[email];
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+    
+    // Check password
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+    
+    // Create session
+    req.session.userId = user.id;
+    req.session.user = {
+      id: user.id,
+      email: user.email,
+      name: user.name
+    };
+    
+    res.json({
+      user: req.session.user
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Session endpoint
+app.get('/api/auth/session', (req, res) => {
+  if (req.session.user) {
+    res.json({
+      user: req.session.user
+    });
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+});
+
+// Logout endpoint
+app.post('/api/auth/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.json({ message: 'Logged out successfully' });
+  });
+});
 
 // Mock chat endpoint - in a real implementation, this would connect to Gemini API and Qdrant
 app.post('/api/chat', async (req, res) => {
