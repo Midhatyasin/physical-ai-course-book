@@ -36,3 +36,25 @@ For development with auto-reload:
 ```bash
 npm run dev
 ```
+
+## Testing Authentication
+
+To test the authentication endpoints automatically:
+
+### Windows:
+Double-click `test-auth.bat` or run:
+```cmd
+npm run test-auth
+```
+
+### macOS/Linux:
+Run:
+```bash
+./test-auth.sh
+```
+
+### Manual Testing:
+You can also run the test script directly:
+```bash
+node test-auth.js
+```
