@@ -1,8 +1,54 @@
 // Authentication Test Script
 // This script will automatically test the registration and login endpoints
 
-// Use node-fetch for compatibility
-const fetch = require('node-fetch');
+// Use built-in https module for compatibility
+const https = require('https');
+const http = require('http');
+const url = require('url');
+
+// Custom fetch-like function using built-in modules
+function customFetch(requestUrl, options = {}) {
+  return new Promise((resolve, reject) => {
+    const parsedUrl = url.parse(requestUrl);
+    const lib = parsedUrl.protocol === 'https:' ? https : http;
+    
+    const requestOptions = {
+      hostname: parsedUrl.hostname,
+      port: parsedUrl.port,
+      path: parsedUrl.path,
+      method: options.method || 'GET',
+      headers: options.headers || {}
+    };
+    
+    const req = lib.request(requestOptions, (res) => {
+      let data = '';
+      
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      
+      res.on('end', () => {
+        resolve({
+          ok: res.statusCode >= 200 && res.statusCode < 300,
+          status: res.statusCode,
+          statusText: res.statusMessage,
+          json: () => Promise.resolve(JSON.parse(data)),
+          text: () => Promise.resolve(data)
+        });
+      });
+    });
+    
+    req.on('error', (error) => {
+      reject(error);
+    });
+    
+    if (options.body) {
+      req.write(options.body);
+    }
+    
+    req.end();
+  });
+}
 
 async function testAuthentication() {
   const BASE_URL = 'http://localhost:3003/api/auth';
@@ -19,7 +65,7 @@ async function testAuthentication() {
   try {
     // Test 1: Register a new user
     console.log('1. Testing User Registration...');
-    const registerResponse = await fetch(`${BASE_URL}/register`, {
+    const registerResponse = await customFetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +89,7 @@ async function testAuthentication() {
     
     // Test 2: Login with the user
     console.log('2. Testing User Login...');
-    const loginResponse = await fetch(`${BASE_URL}/login`, {
+    const loginResponse = await customFetch(`${BASE_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -69,9 +115,8 @@ async function testAuthentication() {
     
     // Test 3: Check session
     console.log('3. Testing Session Check...');
-    const sessionResponse = await fetch(`${BASE_URL}/session`, {
+    const sessionResponse = await customFetch(`${BASE_URL}/session`, {
       method: 'GET',
-      credentials: 'include',
     });
     
     if (sessionResponse.ok) {
