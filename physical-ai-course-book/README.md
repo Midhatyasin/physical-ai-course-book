@@ -55,10 +55,25 @@ npm run build
 - GitHub Pages (via `gh-pages` plugin)
 
 ### Vercel
+
+#### Option 1: Manual Deployment
 1. Push your code to GitHub
 2. Create a new project on [Vercel](https://vercel.com/)
 3. Import your repository
 4. Vercel will automatically detect the Docusaurus project and configure the build settings
 5. Click "Deploy" and your site will be live!
+
+#### Option 2: Automated Deployment Script
+We've included deployment scripts to make the process easier:
+
+1. Install [Node.js](https://nodejs.org/) if you haven't already
+2. Run the deployment script:
+   - On Windows: Double-click `deploy-vercel.bat` or run `deploy-vercel.bat` in Command Prompt
+   - On macOS/Linux: Run `node deploy-vercel.js` in Terminal
+
+The script will:
+- Check for and install Vercel CLI if needed
+- Build your project
+- Deploy to Vercel
 
 For manual configuration, the `vercel.json` file is already included in this repository.
