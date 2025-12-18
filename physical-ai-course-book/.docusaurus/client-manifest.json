@@ -157,7 +157,7 @@
       "js": [
         {
           "file": "assets/js/runtime~main.6d2076ef.js",
-          "hash": "cdfe2e7b60781045",
+          "hash": "5171adab72bd0d04",
           "publicPath": "/physical-ai-course-book/assets/js/runtime~main.6d2076ef.js"
         }
       ]
@@ -210,9 +210,9 @@
     "792": {
       "js": [
         {
-          "file": "assets/js/main.0a5c3dfd.js",
-          "hash": "4cba1a09c7560d8a",
-          "publicPath": "/physical-ai-course-book/assets/js/main.0a5c3dfd.js"
+          "file": "assets/js/main.6f6f1049.js",
+          "hash": "fcbf6f3bd0feabb2",
+          "publicPath": "/physical-ai-course-book/assets/js/main.6f6f1049.js"
         }
       ]
     },

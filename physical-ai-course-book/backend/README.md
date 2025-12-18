@@ -26,6 +26,9 @@ This is the backend API for the Physical AI & Humanoid Robotics textbook chatbot
 
 - `POST /api/chat` - Chat with the AI assistant
 - `GET /api/health` - Health check endpoint
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/session` - Get current user session
 
 ## Development
 

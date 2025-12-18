@@ -2,12 +2,21 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+// Initialize Better Auth
+const { betterAuth } = require('better-auth');
+const authConfig = require('./auth.config');
+
+const auth = betterAuth(authConfig);
+
 const app = express();
 const PORT = process.env.PORT || 3003;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Better Auth routes
+app.use('/api/auth', auth.handler);
 
 // Mock chat endpoint - in a real implementation, this would connect to Gemini API and Qdrant
 app.post('/api/chat', async (req, res) => {
