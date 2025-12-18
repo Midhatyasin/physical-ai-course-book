@@ -50,4 +50,15 @@ npm run build
 - **Auth → Better Auth**: [github.com/better-auth/better-auth](https://github.com/better-auth/better-auth)
 
 ## 📚 Deployment
+
+### GitHub Pages
 - GitHub Pages (via `gh-pages` plugin)
+
+### Vercel
+1. Push your code to GitHub
+2. Create a new project on [Vercel](https://vercel.com/)
+3. Import your repository
+4. Vercel will automatically detect the Docusaurus project and configure the build settings
+5. Click "Deploy" and your site will be live!
+
+For manual configuration, the `vercel.json` file is already included in this repository.
