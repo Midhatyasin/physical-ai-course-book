@@ -57,7 +57,7 @@ For the chatbot to work, you need to run the backend API:
    npm start
    ```
 
-5. The backend will run on port 3001 by default
+5. The backend will run on port 3002 by default
 
 ## 🧠 Tech Stack
 - **Frontend**: Docusaurus + Spec-Kit Plus

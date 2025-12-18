@@ -11,7 +11,7 @@ This is the backend API for the Physical AI & Humanoid Robotics textbook chatbot
 
 2. Create a `.env` file with your API keys:
    ```env
-   PORT=3001
+   PORT=3002
    GEMINI_API_KEY=your_gemini_api_key
    QDRANT_URL=your_qdrant_url
    QDRANT_API_KEY=your_qdrant_api_key

@@ -11,8 +11,8 @@ export default function ChatBot() {
       setMessages(prev => [...prev, userMessage]);
       setInput('');
       
-      // Simulate API call
-      const response = await fetch('/api/chat', {
+      // API call to backend
+      const response = await fetch('http://localhost:3002/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: input })
