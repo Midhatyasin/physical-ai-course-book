@@ -6,7 +6,23 @@ require('dotenv').config();
 const { betterAuth } = require('better-auth');
 const authConfig = require('./auth.config');
 
-const auth = betterAuth(authConfig);
+let auth;
+try {
+  auth = betterAuth(authConfig);
+  console.log('Better Auth initialized successfully');
+} catch (error) {
+  console.error('Failed to initialize Better Auth:', error.message);
+  console.log('Continuing without authentication...');
+  // Create a mock auth object for development
+  auth = {
+    handler: (req, res) => {
+      res.status(501).json({ 
+        error: 'Authentication not available', 
+        message: 'Better Auth failed to initialize. Check database configuration.' 
+      });
+    }
+  };
+}
 
 const app = express();
 const PORT = process.env.PORT || 3003;
