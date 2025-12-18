@@ -119,7 +119,7 @@ app.post('/api/auth/logout', (req, res) => {
   });
 });
 
-// Mock chat endpoint - in a real implementation, this would connect to Gemini API and Qdrant
+// RAG-enabled chat endpoint - connects to Gemini API and book content
 app.post('/api/chat', async (req, res) => {
   try {
     const { text } = req.body;
@@ -127,81 +127,55 @@ app.post('/api/chat', async (req, res) => {
     // Simulate API processing delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Enhanced mock responses based on book content - in a real implementation, this would come from Gemini API with RAG
-    const keywordResponses = {
-      'physical ai': [
-        "Physical AI refers to artificial intelligence systems that operate in the real world, interacting with physical environments through sensors, actuators, and mechanical bodies. Unlike digital AI, Physical AI embodies intelligence—it perceives, reasons, and acts in 3D space.Embodied Intelligence = Brain (AI) + Body (Robot) + Environment (World).",
-        "The real world is messy with objects having weight, friction, and unpredictable behavior. Physical AI bridges this gap by learning from real sensory inputs, adapting to dynamic environments, and performing tasks like walking, grasping, and navigating.",
-        "Applications include domestic helpers (Roomba, kitchen assistants), industrial robots (Amazon Kiva, autonomous forklifts), healthcare (surgical assistants, elderly care robots), and mobility (self-driving cars, delivery drones)."
-      ],
-      'robot': [
-        "Robots are programmable machines that can execute tasks autonomously or semi-autonomously. They typically have sensors, processors, and actuators.",
-        "Humanoid robots offer versatility (walk through doors, climb stairs), trust (familiar appearance reduces fear), and social compatibility (eye contact, gestures) which makes them ideal for domestic use.",
-        "Industrial robots are used in manufacturing for tasks like welding, painting, and assembly."
-      ],
-      'ros2': [
-        "ROS 2 (Robot Operating System 2) is an open-source framework for building robot applications. Think of ROS 2 as the nervous system of a robot. It provides communication middleware, hardware abstraction, and development tools.",
-        "Core concepts include Nodes (independent processes), Topics (asynchronous message passing), Services (synchronous request-response), and Actions (long-running tasks with feedback).",
-        "ROS 2 uses a distributed architecture with nodes communicating through topics, services, and actions. It's essential for building complex robotic systems."
-      ],
-      'simulation': [
-        "Simulation is crucial in robotics because it ensures safety (test behaviors without risking hardware), speed (iterate faster than real-world trials), repeatability (controlled environments for debugging), and scalability (test multiple scenarios simultaneously).",
-        "Think of simulation as a digital twin of the real world. It's essential for testing robotics algorithms safely.",
-        "Popular simulation platforms include Gazebo and Unity 3D."
-      ],
-      'gazebo': [
-        "Gazebo is an open-source robotics simulator that integrates seamlessly with ROS 2. It offers physics engines (ODE, Bullet), sensor simulation (LiDAR, Cameras, IMUs), 3D visualization, and plugin architecture for custom behaviors.",
-        "Gazebo is often used with ROS for testing robot algorithms in a safe, simulated environment. It supports various robot models and can simulate complex environments with realistic physics.",
-        "You can install Gazebo with ROS 2 using 'sudo apt install ros-humble-gazebo-ros-pkgs' on Ubuntu 22.04."
-      ],
-      'isaac': [
-        "NVIDIA Isaac is a platform for autonomous machines that includes Isaac SDK for development and Isaac Sim for simulation.",
-        "Isaac SDK provides optimized algorithms for perception, localization, and mapping.",
-        "Isaac Sim is built on Omniverse and offers high-fidelity simulation for robotics."
-      ],
-      'vla': [
-        "Vision-Language-Action (VLA) models combine computer vision, natural language processing, and robotic control.",
-        "VLA models enable robots to understand instructions given in natural language and execute appropriate actions.",
-        "These models represent the convergence of multimodal AI with robotics."
-      ],
-      'code': [
-        "I can help explain code concepts related to Physical AI and robotics. Please share the specific code you'd like me to explain.",
-        "For code explanation, please paste the code snippet you'd like me to analyze.",
-        "I can explain code related to ROS2, robotics algorithms, or AI implementations. What code would you like me to review?"
-      ]
-    };
+    // Check if we have processed embeddings
+    const fs = require('fs');
+    const path = require('path');
+    const embeddingsPath = path.join(__dirname, 'embeddings.json');
     
-    // Select a response based on keywords in the question
-    let selectedResponse = "I can help with topics related to Physical AI, robots, ROS2, simulation tools like Gazebo, NVIDIA Isaac, VLA models, and code explanation. Please ask a specific question about any of these topics!";
-    
-    // Convert text to lowercase for matching
-    const lowerText = text.toLowerCase();
-    
-    // More flexible keyword matching
-    const keywordMap = {
-      'physical ai': ['physical ai', 'physicalai', 'embodied intelligence'],
-      'robot': ['robot', 'robots', 'robotics', 'humanoid'],
-      'ros2': ['ros2', 'ros 2', 'robot operating system 2', 'nodes', 'topics', 'services', 'actions'],
-      'simulation': ['simulation', 'simulate', 'simulator', 'digital twin'],
-      'gazebo': ['gazebo', 'gazebo simulator', 'physics engine'],
-      'isaac': ['isaac', 'nvidia isaac', 'isaac sdk', 'isaac sim'],
-      'vla': ['vla', 'vision-language-action', 'vision language action', 'multimodal ai'],
-      'code': ['code', 'coding', 'program', 'explain code', 'code explanation']
-    };
-    
-    // Check for keywords and select appropriate response
-    for (const [primaryKeyword, variants] of Object.entries(keywordMap)) {
-      // Check if any variant matches
-      if (variants.some(variant => lowerText.includes(variant))) {
-        const responses = keywordResponses[primaryKeyword];
-        selectedResponse = responses[Math.floor(Math.random() * responses.length)];
-        break;
+    if (fs.existsSync(embeddingsPath)) {
+      // Use RAG system with actual book content
+      const { GoogleGenerativeAI } = require('@google/generative-ai');
+      const { findRelevantDocuments } = require('./vector-search');
+      
+      // Initialize Gemini API
+      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+      
+      // Create embedding for the query
+      const embeddingModel = genAI.getGenerativeModel({ model: "embedding-001" });
+      const embeddingResult = await embeddingModel.embedContent(text);
+      const queryEmbedding = embeddingResult.embedding.values;
+      
+      // Find relevant documents
+      const relevantDocs = await findRelevantDocuments(queryEmbedding, 3);
+      
+      if (relevantDocs.length > 0) {
+        // Create context from relevant documents
+        const context = relevantDocs.map(doc => `From ${doc.source}: ${doc.content}`).join('\n\n');
+        
+        // Generate response using Gemini with context
+        const prompt = `You are a helpful assistant explaining concepts from a Physical AI and Humanoid Robotics textbook. 
+        Use the following context to answer the question accurately:
+
+${context}
+
+Question: ${text}
+
+Answer:`;
+        
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const reply = response.text();
+        
+        res.json({ reply });
+      } else {
+        // Fallback to keyword-based responses if no relevant documents found
+        res.json({ reply: "I couldn't find specific information about that in the textbook. Please ask about Physical AI, robots, ROS2, simulation, or other topics covered in the course." });
       }
+    } else {
+      // Fallback to mock responses if embeddings haven't been generated
+      res.json({ reply: "The RAG system hasn't been initialized yet. Please run 'npm run process-content' to process the book content first. In the meantime, I can answer general questions about Physical AI, robotics, and related topics." });
     }
-    
-    res.json({
-      reply: `${selectedResponse} (This is a simulated response. In a full implementation, this would connect to the Gemini API and Qdrant database.)`
-    });
   } catch (error) {
     console.error('Chat error:', error);
     res.status(500).json({ 
