@@ -119,7 +119,7 @@ app.post('/api/auth/logout', (req, res) => {
   });
 });
 
-// RAG-enabled chat endpoint - connects to Gemini API and book content
+// RAG-enabled chat endpoint - connects to book content (mock implementation)
 app.post('/api/chat', async (req, res) => {
   try {
     const { text } = req.body;
@@ -134,17 +134,14 @@ app.post('/api/chat', async (req, res) => {
     
     if (fs.existsSync(embeddingsPath)) {
       // Use RAG system with actual book content
-      const { GoogleGenerativeAI } = require('@google/generative-ai');
       const { findRelevantDocuments } = require('./vector-search');
       
-      // Initialize Gemini API
-      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+      // For temporary solution without API key, we'll use a simplified approach
+      // In a real implementation, we would use Gemini API here
       
-      // Create embedding for the query
-      const embeddingModel = genAI.getGenerativeModel({ model: "embedding-001" });
-      const embeddingResult = await embeddingModel.embedContent(text);
-      const queryEmbedding = embeddingResult.embedding.values;
+      // Create mock embedding for the query
+      const mockQueryEmbedding = Array.from({length: 768}, () => Math.random() * 2 - 1);
+      const queryEmbedding = mockQueryEmbedding;
       
       // Find relevant documents
       const relevantDocs = await findRelevantDocuments(queryEmbedding, 3);
@@ -153,19 +150,12 @@ app.post('/api/chat', async (req, res) => {
         // Create context from relevant documents
         const context = relevantDocs.map(doc => `From ${doc.source}: ${doc.content}`).join('\n\n');
         
-        // Generate response using Gemini with context
-        const prompt = `You are a helpful assistant explaining concepts from a Physical AI and Humanoid Robotics textbook. 
-        Use the following context to answer the question accurately:
+        // Generate response using mock approach (in a real implementation, we would use Gemini API)
+        const reply = `Based on the Physical AI and Humanoid Robotics textbook:
 
 ${context}
 
-Question: ${text}
-
-Answer:`;
-        
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const reply = response.text();
+This is a temporary mock response. In a full implementation with a valid API key, this would provide a more detailed and coherent answer based on the textbook content.`;
         
         res.json({ reply });
       } else {

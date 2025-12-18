@@ -70,31 +70,24 @@ function splitIntoChunks(text, chunkSize) {
   return chunks;
 }
 
-// Function to create embeddings using Gemini
-async function createEmbeddings(documents) {
-  console.log('Creating embeddings for documents...');
-  
-  const embeddingModel = genAI.getGenerativeModel({ model: "embedding-001" });
+// Function to create mock embeddings (without API key)
+function createMockEmbeddings(documents) {
+  console.log('Creating mock embeddings for documents...');
   
   const embeddedDocuments = [];
   
   for (let i = 0; i < documents.length; i++) {
     const doc = documents[i];
     
-    try {
-      // Create embedding for the document content
-      const embeddingResult = await embeddingModel.embedContent(doc.content);
-      const embedding = embeddingResult.embedding.values;
-      
-      embeddedDocuments.push({
-        ...doc,
-        embedding: embedding
-      });
-      
-      console.log(`Created embedding for document ${i + 1}/${documents.length}`);
-    } catch (error) {
-      console.error(`Error creating embedding for document ${doc.id}:`, error.message);
-    }
+    // Create a mock embedding (random values)
+    const mockEmbedding = Array.from({length: 768}, () => Math.random() * 2 - 1);
+    
+    embeddedDocuments.push({
+      ...doc,
+      embedding: mockEmbedding
+    });
+    
+    console.log(`Created mock embedding for document ${i + 1}/${documents.length}`);
   }
   
   return embeddedDocuments;
@@ -121,8 +114,8 @@ async function processBookContent() {
     // Read book content
     const documents = await readBookContent();
     
-    // Create embeddings
-    const embeddedDocuments = await createEmbeddings(documents);
+    // Create mock embeddings (no API key required)
+    const embeddedDocuments = createMockEmbeddings(documents);
     
     // Save embeddings
     saveEmbeddings(embeddedDocuments);
