@@ -96,7 +96,7 @@ By the end of this chapter, you will:
 - [ ] Simulation world (Isaac Sim `.usd`)
 - [ ] README with setup/run instructions
 - [ ] Video demo (3 mins max)
-- [ ] Report (PDF, <5 pages)
+- [ ] Report (PDF, \u003C5 pages)
 
 ### 🧠 Tips
 - Use **comments** in code

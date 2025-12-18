@@ -1,0 +1,24 @@
+{
+  "id": "module3-isaac",
+  "title": "Chapter 4: NVIDIA Isaac Platform",
+  "description": "🎯 Learning Objectives",
+  "source": "@site/docs/module3-isaac.md",
+  "sourceDirName": ".",
+  "slug": "/module3-isaac",
+  "permalink": "/physical-ai-course-book/module3-isaac",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/Midhatyasin/physical-ai-course-book/tree/main/docs/module3-isaac.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Chapter 3: Robot Simulation with Gazebo",
+    "permalink": "/physical-ai-course-book/module2-simulation"
+  },
+  "next": {
+    "title": "Chapter 5: Vision-Language-Action (VLA)",
+    "permalink": "/physical-ai-course-book/module4-vla"
+  }
+}
