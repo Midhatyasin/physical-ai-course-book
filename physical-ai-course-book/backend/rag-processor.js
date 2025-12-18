@@ -135,4 +135,4 @@ if (require.main === module) {
   processBookContent();
 }
 
-module.exports = { readBookContent, createEmbeddings, saveEmbeddings, processBookContent };
+module.exports = { readBookContent, createMockEmbeddings, saveEmbeddings, processBookContent };
