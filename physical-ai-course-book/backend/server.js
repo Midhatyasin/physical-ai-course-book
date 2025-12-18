@@ -127,32 +127,32 @@ app.post('/api/chat', async (req, res) => {
     // Simulate API processing delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Improved mock responses based on keywords - in a real implementation, this would come from Gemini API
+    // Enhanced mock responses based on book content - in a real implementation, this would come from Gemini API with RAG
     const keywordResponses = {
       'physical ai': [
-        "Physical AI refers to artificial intelligence systems that interact with the physical world through sensors and actuators. These systems can perceive their environment, make decisions, and act upon it.",
-        "Physical AI combines machine learning with robotics to create systems that can learn from and interact with the physical world.",
-        "Unlike traditional AI that operates in virtual environments, Physical AI systems must deal with real-world physics, uncertainty, and continuous sensor data."
+        "Physical AI refers to artificial intelligence systems that operate in the real world, interacting with physical environments through sensors, actuators, and mechanical bodies. Unlike digital AI, Physical AI embodies intelligence—it perceives, reasons, and acts in 3D space.Embodied Intelligence = Brain (AI) + Body (Robot) + Environment (World).",
+        "The real world is messy with objects having weight, friction, and unpredictable behavior. Physical AI bridges this gap by learning from real sensory inputs, adapting to dynamic environments, and performing tasks like walking, grasping, and navigating.",
+        "Applications include domestic helpers (Roomba, kitchen assistants), industrial robots (Amazon Kiva, autonomous forklifts), healthcare (surgical assistants, elderly care robots), and mobility (self-driving cars, delivery drones)."
       ],
       'robot': [
         "Robots are programmable machines that can execute tasks autonomously or semi-autonomously. They typically have sensors, processors, and actuators.",
-        "Humanoid robots are designed to resemble the human form, which allows them to operate in environments built for humans.",
+        "Humanoid robots offer versatility (walk through doors, climb stairs), trust (familiar appearance reduces fear), and social compatibility (eye contact, gestures) which makes them ideal for domestic use.",
         "Industrial robots are used in manufacturing for tasks like welding, painting, and assembly."
       ],
       'ros2': [
-        "ROS 2 (Robot Operating System 2) is a set of software libraries and tools that help you build robot applications.",
-        "ROS 2 provides hardware abstraction, device drivers, libraries, visualizers, message-passing, package management, and more.",
-        "ROS 2 uses a distributed architecture with nodes communicating through topics, services, and actions."
+        "ROS 2 (Robot Operating System 2) is an open-source framework for building robot applications. Think of ROS 2 as the nervous system of a robot. It provides communication middleware, hardware abstraction, and development tools.",
+        "Core concepts include Nodes (independent processes), Topics (asynchronous message passing), Services (synchronous request-response), and Actions (long-running tasks with feedback).",
+        "ROS 2 uses a distributed architecture with nodes communicating through topics, services, and actions. It's essential for building complex robotic systems."
       ],
       'simulation': [
-        "Simulation is crucial for robotics development as it allows testing algorithms safely and cost-effectively.",
-        "Gazebo is a popular robotics simulator that provides physics engines and realistic sensor models.",
-        "Unity 3D is increasingly used for robotics simulation, especially for computer vision and AI training."
+        "Simulation is crucial in robotics because it ensures safety (test behaviors without risking hardware), speed (iterate faster than real-world trials), repeatability (controlled environments for debugging), and scalability (test multiple scenarios simultaneously).",
+        "Think of simulation as a digital twin of the real world. It's essential for testing robotics algorithms safely.",
+        "Popular simulation platforms include Gazebo and Unity 3D."
       ],
       'gazebo': [
-        "Gazebo is a powerful robotics simulator that provides physics engines, sensor models, and visualization tools.",
-        "Gazebo is often used with ROS for testing robot algorithms in a safe, simulated environment.",
-        "Gazebo supports various robot models and can simulate complex environments with realistic physics."
+        "Gazebo is an open-source robotics simulator that integrates seamlessly with ROS 2. It offers physics engines (ODE, Bullet), sensor simulation (LiDAR, Cameras, IMUs), 3D visualization, and plugin architecture for custom behaviors.",
+        "Gazebo is often used with ROS for testing robot algorithms in a safe, simulated environment. It supports various robot models and can simulate complex environments with realistic physics.",
+        "You can install Gazebo with ROS 2 using 'sudo apt install ros-humble-gazebo-ros-pkgs' on Ubuntu 22.04."
       ],
       'isaac': [
         "NVIDIA Isaac is a platform for autonomous machines that includes Isaac SDK for development and Isaac Sim for simulation.",
@@ -179,13 +179,13 @@ app.post('/api/chat', async (req, res) => {
     
     // More flexible keyword matching
     const keywordMap = {
-      'physical ai': ['physical ai', 'physicalai'],
-      'robot': ['robot', 'robots', 'robotics'],
-      'ros2': ['ros2', 'ros 2', 'robot operating system 2'],
-      'simulation': ['simulation', 'simulate', 'simulator'],
-      'gazebo': ['gazebo', 'gazebo simulator'],
-      'isaac': ['isaac', 'nvidia isaac'],
-      'vla': ['vla', 'vision-language-action', 'vision language action'],
+      'physical ai': ['physical ai', 'physicalai', 'embodied intelligence'],
+      'robot': ['robot', 'robots', 'robotics', 'humanoid'],
+      'ros2': ['ros2', 'ros 2', 'robot operating system 2', 'nodes', 'topics', 'services', 'actions'],
+      'simulation': ['simulation', 'simulate', 'simulator', 'digital twin'],
+      'gazebo': ['gazebo', 'gazebo simulator', 'physics engine'],
+      'isaac': ['isaac', 'nvidia isaac', 'isaac sdk', 'isaac sim'],
+      'vla': ['vla', 'vision-language-action', 'vision language action', 'multimodal ai'],
       'code': ['code', 'coding', 'program', 'explain code', 'code explanation']
     };
     
