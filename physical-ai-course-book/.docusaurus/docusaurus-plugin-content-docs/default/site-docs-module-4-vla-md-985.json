@@ -1,0 +1,24 @@
+{
+  "id": "module4-vla",
+  "title": "Chapter 5: Vision-Language-Action (VLA)",
+  "description": "🎯 Learning Objectives",
+  "source": "@site/docs/module4-vla.md",
+  "sourceDirName": ".",
+  "slug": "/module4-vla",
+  "permalink": "/physical-ai-course-book/module4-vla",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/Midhatyasin/physical-ai-course-book/tree/main/docs/module4-vla.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Chapter 4: NVIDIA Isaac Platform",
+    "permalink": "/physical-ai-course-book/module3-isaac"
+  },
+  "next": {
+    "title": "Chapter 6: Capstone Project – Autonomous Humanoid",
+    "permalink": "/physical-ai-course-book/capstone"
+  }
+}

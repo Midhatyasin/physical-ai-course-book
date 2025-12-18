@@ -1,0 +1,63 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/physical-ai-course-book/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/physical-ai-course-book/",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "capstone",
+              "path": "/physical-ai-course-book/capstone",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "deployment",
+              "path": "/physical-ai-course-book/deployment",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/physical-ai-course-book/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "module1-ros2",
+              "path": "/physical-ai-course-book/module1-ros2",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "module2-simulation",
+              "path": "/physical-ai-course-book/module2-simulation",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "module3-isaac",
+              "path": "/physical-ai-course-book/module3-isaac",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "module4-vla",
+              "path": "/physical-ai-course-book/module4-vla",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/physical-ai-course-book/intro",
+                "label": "intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

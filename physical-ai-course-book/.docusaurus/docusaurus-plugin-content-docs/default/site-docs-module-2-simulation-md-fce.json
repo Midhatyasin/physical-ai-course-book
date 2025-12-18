@@ -1,0 +1,24 @@
+{
+  "id": "module2-simulation",
+  "title": "Chapter 3: Robot Simulation with Gazebo",
+  "description": "🎯 Learning Objectives",
+  "source": "@site/docs/module2-simulation.md",
+  "sourceDirName": ".",
+  "slug": "/module2-simulation",
+  "permalink": "/physical-ai-course-book/module2-simulation",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/Midhatyasin/physical-ai-course-book/tree/main/docs/module2-simulation.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Chapter 2: ROS 2 Fundamentals",
+    "permalink": "/physical-ai-course-book/module1-ros2"
+  },
+  "next": {
+    "title": "Chapter 4: NVIDIA Isaac Platform",
+    "permalink": "/physical-ai-course-book/module3-isaac"
+  }
+}

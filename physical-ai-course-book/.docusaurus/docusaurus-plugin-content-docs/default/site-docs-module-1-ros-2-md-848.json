@@ -1,0 +1,24 @@
+{
+  "id": "module1-ros2",
+  "title": "Chapter 2: ROS 2 Fundamentals",
+  "description": "🎯 Learning Objectives",
+  "source": "@site/docs/module1-ros2.md",
+  "sourceDirName": ".",
+  "slug": "/module1-ros2",
+  "permalink": "/physical-ai-course-book/module1-ros2",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/Midhatyasin/physical-ai-course-book/tree/main/docs/module1-ros2.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Chapter 1: Introduction to Physical AI",
+    "permalink": "/physical-ai-course-book/intro"
+  },
+  "next": {
+    "title": "Chapter 3: Robot Simulation with Gazebo",
+    "permalink": "/physical-ai-course-book/module2-simulation"
+  }
+}
