@@ -149,6 +149,11 @@ app.post('/api/chat', async (req, res) => {
         "Gazebo is a popular robotics simulator that provides physics engines and realistic sensor models.",
         "Unity 3D is increasingly used for robotics simulation, especially for computer vision and AI training."
       ],
+      'gazebo': [
+        "Gazebo is a powerful robotics simulator that provides physics engines, sensor models, and visualization tools.",
+        "Gazebo is often used with ROS for testing robot algorithms in a safe, simulated environment.",
+        "Gazebo supports various robot models and can simulate complex environments with realistic physics."
+      ],
       'isaac': [
         "NVIDIA Isaac is a platform for autonomous machines that includes Isaac SDK for development and Isaac Sim for simulation.",
         "Isaac SDK provides optimized algorithms for perception, localization, and mapping.",
@@ -158,11 +163,16 @@ app.post('/api/chat', async (req, res) => {
         "Vision-Language-Action (VLA) models combine computer vision, natural language processing, and robotic control.",
         "VLA models enable robots to understand instructions given in natural language and execute appropriate actions.",
         "These models represent the convergence of multimodal AI with robotics."
+      ],
+      'code': [
+        "I can help explain code concepts related to Physical AI and robotics. Please share the specific code you'd like me to explain.",
+        "For code explanation, please paste the code snippet you'd like me to analyze.",
+        "I can explain code related to ROS2, robotics algorithms, or AI implementations. What code would you like me to review?"
       ]
     };
     
     // Select a response based on keywords in the question
-    let selectedResponse = "I'm not sure about that specific topic. Could you ask about Physical AI, robots, ROS2, simulation, Isaac, or VLA models?";
+    let selectedResponse = "I can help with topics related to Physical AI, robots, ROS2, simulation tools like Gazebo, NVIDIA Isaac, VLA models, and code explanation. Please ask a specific question about any of these topics!";
     
     // Convert text to lowercase for matching
     const lowerText = text.toLowerCase();
@@ -173,8 +183,10 @@ app.post('/api/chat', async (req, res) => {
       'robot': ['robot', 'robots', 'robotics'],
       'ros2': ['ros2', 'ros 2', 'robot operating system 2'],
       'simulation': ['simulation', 'simulate', 'simulator'],
+      'gazebo': ['gazebo', 'gazebo simulator'],
       'isaac': ['isaac', 'nvidia isaac'],
-      'vla': ['vla', 'vision-language-action', 'vision language action']
+      'vla': ['vla', 'vision-language-action', 'vision language action'],
+      'code': ['code', 'coding', 'program', 'explain code', 'code explanation']
     };
     
     // Check for keywords and select appropriate response
