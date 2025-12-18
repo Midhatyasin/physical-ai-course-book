@@ -1,50 +1,93 @@
 {
-  "/physical-ai-course-book/profile-cde": {
-    "__comp": "7b514018",
+  "/physical-ai-course-book/__docusaurus/debug-fcf": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
     "__context": {
-      "plugin": "a7456010"
+      "plugin": "plugin---physical-ai-course-book-docusaurus-debugb-38-42c"
+    }
+  },
+  "/physical-ai-course-book/__docusaurus/debug/config-218": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---physical-ai-course-book-docusaurus-debugb-38-42c"
+    }
+  },
+  "/physical-ai-course-book/__docusaurus/debug/content-aa8": {
+    "__comp": "__comp---theme-debug-contentba-8-ce7",
+    "__context": {
+      "plugin": "plugin---physical-ai-course-book-docusaurus-debugb-38-42c"
     },
-    "config": "5e9f5e1a"
+    "__props": "__props---physical-ai-course-book-docusaurus-debug-content-8-c-1-3bd"
+  },
+  "/physical-ai-course-book/__docusaurus/debug/globalData-80a": {
+    "__comp": "__comp---theme-debug-global-dataede-0fa",
+    "__context": {
+      "plugin": "plugin---physical-ai-course-book-docusaurus-debugb-38-42c"
+    }
+  },
+  "/physical-ai-course-book/__docusaurus/debug/metadata-f42": {
+    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
+    "__context": {
+      "plugin": "plugin---physical-ai-course-book-docusaurus-debugb-38-42c"
+    }
+  },
+  "/physical-ai-course-book/__docusaurus/debug/registry-4b2": {
+    "__comp": "__comp---theme-debug-registry-679-501",
+    "__context": {
+      "plugin": "plugin---physical-ai-course-book-docusaurus-debugb-38-42c"
+    }
+  },
+  "/physical-ai-course-book/__docusaurus/debug/routes-74e": {
+    "__comp": "__comp---theme-debug-routes-946-699",
+    "__context": {
+      "plugin": "plugin---physical-ai-course-book-docusaurus-debugb-38-42c"
+    }
+  },
+  "/physical-ai-course-book/profile-cde": {
+    "__comp": "__comp---site-src-pages-profile-jsx-7-b-5-fe8",
+    "__context": {
+      "plugin": "plugin---physical-ai-course-book-profilea-74-114"
+    },
+    "config": "config---physical-ai-course-book-profile-5-e-9-907"
   },
   "/physical-ai-course-book/-b37": {
-    "__comp": "5e95c892",
+    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
-      "plugin": "aba21aa0"
+      "plugin": "plugin---physical-ai-course-book-aba-269"
     }
   },
   "/physical-ai-course-book/-751": {
-    "__comp": "a7bd4aaa",
-    "__props": "542ca5fc"
+    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
+    "__props": "__props---physical-ai-course-book-542-98e"
   },
   "/physical-ai-course-book/-177": {
-    "__comp": "a94703ab"
+    "__comp": "__comp---theme-doc-roota-94-67a"
   },
   "/physical-ai-course-book/capstone-d14": {
-    "__comp": "17896441",
-    "content": "5e207448"
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-course-book-capstone-5-e-2-a88"
   },
   "/physical-ai-course-book/deployment-a58": {
-    "__comp": "17896441",
-    "content": "a3713279"
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-course-book-deploymenta-37-ca9"
   },
   "/physical-ai-course-book/intro-a1b": {
-    "__comp": "17896441",
-    "content": "0e384e19"
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-course-book-intro-0-e-3-228"
   },
   "/physical-ai-course-book/module1-ros2-af1": {
-    "__comp": "17896441",
-    "content": "848cce2f"
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-course-book-module-1-ros-2848-ae3"
   },
   "/physical-ai-course-book/module2-simulation-a62": {
-    "__comp": "17896441",
-    "content": "fcec19fd"
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-course-book-module-2-simulationfce-82c"
   },
   "/physical-ai-course-book/module3-isaac-9ab": {
-    "__comp": "17896441",
-    "content": "f2000ee2"
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-course-book-module-3-isaacf-20-a5f"
   },
   "/physical-ai-course-book/module4-vla-5ca": {
-    "__comp": "17896441",
-    "content": "985f4c83"
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-course-book-module-4-vla-985-83a"
   }
 }

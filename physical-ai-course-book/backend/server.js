@@ -127,20 +127,56 @@ app.post('/api/chat', async (req, res) => {
     // Simulate API processing delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Mock response - in a real implementation, this would come from Gemini API
-    const mockResponses = [
-      "I understand you're asking about Physical AI. Physical AI refers to artificial intelligence systems that interact with the physical world through sensors and actuators.",
-      "That's an interesting question about robotics. Humanoid robots are designed to resemble the human form and can perform tasks in human environments.",
-      "ROS 2 is a great framework for robotics development. It provides tools and libraries for building robot applications.",
-      "Simulation is crucial for testing robotics algorithms safely. Gazebo and Unity are popular simulation platforms.",
-      "NVIDIA Isaac is powerful for AI-powered perception in robotics applications."
-    ];
+    // Improved mock responses based on keywords - in a real implementation, this would come from Gemini API
+    const keywordResponses = {
+      'physical ai': [
+        "Physical AI refers to artificial intelligence systems that interact with the physical world through sensors and actuators. These systems can perceive their environment, make decisions, and act upon it.",
+        "Physical AI combines machine learning with robotics to create systems that can learn from and interact with the physical world.",
+        "Unlike traditional AI that operates in virtual environments, Physical AI systems must deal with real-world physics, uncertainty, and continuous sensor data."
+      ],
+      'robot': [
+        "Robots are programmable machines that can execute tasks autonomously or semi-autonomously. They typically have sensors, processors, and actuators.",
+        "Humanoid robots are designed to resemble the human form, which allows them to operate in environments built for humans.",
+        "Industrial robots are used in manufacturing for tasks like welding, painting, and assembly."
+      ],
+      'ros2': [
+        "ROS 2 (Robot Operating System 2) is a set of software libraries and tools that help you build robot applications.",
+        "ROS 2 provides hardware abstraction, device drivers, libraries, visualizers, message-passing, package management, and more.",
+        "ROS 2 uses a distributed architecture with nodes communicating through topics, services, and actions."
+      ],
+      'simulation': [
+        "Simulation is crucial for robotics development as it allows testing algorithms safely and cost-effectively.",
+        "Gazebo is a popular robotics simulator that provides physics engines and realistic sensor models.",
+        "Unity 3D is increasingly used for robotics simulation, especially for computer vision and AI training."
+      ],
+      'isaac': [
+        "NVIDIA Isaac is a platform for autonomous machines that includes Isaac SDK for development and Isaac Sim for simulation.",
+        "Isaac SDK provides optimized algorithms for perception, localization, and mapping.",
+        "Isaac Sim is built on Omniverse and offers high-fidelity simulation for robotics."
+      ],
+      'vla': [
+        "Vision-Language-Action (VLA) models combine computer vision, natural language processing, and robotic control.",
+        "VLA models enable robots to understand instructions given in natural language and execute appropriate actions.",
+        "These models represent the convergence of multimodal AI with robotics."
+      ]
+    };
     
-    // Select a random response for demonstration
-    const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
+    // Select a response based on keywords in the question
+    let selectedResponse = "I'm not sure about that specific topic. Could you ask about Physical AI, robots, ROS2, simulation, Isaac, or VLA models?";
+    
+    // Convert text to lowercase for matching
+    const lowerText = text.toLowerCase();
+    
+    // Check for keywords and select appropriate response
+    for (const [keyword, responses] of Object.entries(keywordResponses)) {
+      if (lowerText.includes(keyword)) {
+        selectedResponse = responses[Math.floor(Math.random() * responses.length)];
+        break;
+      }
+    }
     
     res.json({
-      reply: `${randomResponse} (This is a simulated response. In a full implementation, this would connect to the Gemini API and Qdrant database.)`
+      reply: `${selectedResponse} (This is a simulated response. In a full implementation, this would connect to the Gemini API and Qdrant database.)`
     });
   } catch (error) {
     console.error('Chat error:', error);

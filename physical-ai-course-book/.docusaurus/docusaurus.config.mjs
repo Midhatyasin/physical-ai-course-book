@@ -26,12 +26,12 @@ export default {
       {
         "docs": {
           "routeBasePath": "/",
-          "sidebarPath": "c:\\1st hackathon\\physical-ai-course-book\\sidebars.js",
+          "sidebarPath": "C:\\1st hackathon\\physical-ai-course-book\\sidebars.js",
           "editUrl": "https://github.com/Midhatyasin/physical-ai-course-book/tree/main/"
         },
         "blog": false,
         "theme": {
-          "customCss": "c:\\1st hackathon\\physical-ai-course-book\\src\\css\\custom.css"
+          "customCss": "C:\\1st hackathon\\physical-ai-course-book\\src\\css\\custom.css"
         }
       }
     ]
