@@ -167,9 +167,21 @@ app.post('/api/chat', async (req, res) => {
     // Convert text to lowercase for matching
     const lowerText = text.toLowerCase();
     
+    // More flexible keyword matching
+    const keywordMap = {
+      'physical ai': ['physical ai', 'physicalai'],
+      'robot': ['robot', 'robots', 'robotics'],
+      'ros2': ['ros2', 'ros 2', 'robot operating system 2'],
+      'simulation': ['simulation', 'simulate', 'simulator'],
+      'isaac': ['isaac', 'nvidia isaac'],
+      'vla': ['vla', 'vision-language-action', 'vision language action']
+    };
+    
     // Check for keywords and select appropriate response
-    for (const [keyword, responses] of Object.entries(keywordResponses)) {
-      if (lowerText.includes(keyword)) {
+    for (const [primaryKeyword, variants] of Object.entries(keywordMap)) {
+      // Check if any variant matches
+      if (variants.some(variant => lowerText.includes(variant))) {
+        const responses = keywordResponses[primaryKeyword];
         selectedResponse = responses[Math.floor(Math.random() * responses.length)];
         break;
       }
